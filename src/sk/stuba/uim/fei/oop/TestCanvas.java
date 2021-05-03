@@ -51,9 +51,33 @@ public class TestCanvas extends Canvas implements MouseListener, MouseMotionList
     @Override
     public void mouseDragged(MouseEvent e) {
         if(aktualny_obdlzinik != null){
-            aktualny_obdlzinik.width= e.getX()-xpos;
-            aktualny_obdlzinik.height = e.getY() - ypos;
-            repaint();
+            int dx=e.getX();
+            int dy = e.getY();
+
+            if(dx>xpos && dy>ypos){
+            aktualny_obdlzinik.width= dx-xpos;
+            aktualny_obdlzinik.height = dy - ypos;
+            }
+
+            if(dx<xpos && dy>ypos){
+                aktualny_obdlzinik.x = dx;
+                    aktualny_obdlzinik.width= xpos-dx;
+                    aktualny_obdlzinik.height = dy - ypos;
+
+            }
+
+            if(dx>xpos && dy<ypos){
+                aktualny_obdlzinik.y = dy;
+                aktualny_obdlzinik.width= dx-xpos;
+                aktualny_obdlzinik.height = ypos-dy ;
+            }
+
+            if(dx<xpos && dy<ypos){
+                aktualny_obdlzinik.x = dx;
+                aktualny_obdlzinik.y = dy;
+                aktualny_obdlzinik.width= xpos-dx;
+                aktualny_obdlzinik.height = ypos-dy ;
+            }
         }
     }
 
